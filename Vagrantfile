@@ -49,9 +49,13 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "2019-box", autostart: false do |cfg|
-    cfg.vm.box     = "StefanScherer/windows_2019_docker"
+    # cfg.vm.box     = "StefanScherer/windows_2019_docker"
+    cfg.vm.box     = "windows_2019_docker"
     cfg.vm.provision "shell", path: "scripts/create-machine.ps1", args: "-machineHome #{home} -machineName 2019-box"
-    cfg.vm.provider "virtualbox" do |v, override|
+    #cfg.vm.provider "virtualbox" do |v, override|
+    #  override.vm.network :private_network, ip: "192.168.59.51", gateway: "192.168.56.1"
+    #end
+    cfg.vm.provider "parallels" do |v, override|
       override.vm.network :private_network, ip: "192.168.59.51", gateway: "192.168.56.1"
     end
   end
