@@ -72,7 +72,13 @@ Vagrant.configure("2") do |config|
       override.vm.network :private_network, ip: "192.168.59.52", gateway: "192.168.56.1"
     end
   end
-
+  config.vm.define "2022-box-parallels", autostart: false do |cfg|
+    cfg.vm.box     = "windows_2022_docker"
+    cfg.vm.provision "shell", path: "scripts/create-machine.ps1", args: "-machineHome #{home} -machineName 2022-box"
+    cfg.vm.provider "parallels" do |v, override|
+      override.vm.network :private_network, ip: "10.211.55.5", gateway: "10.211.55.1"
+    end
+  end
   config.vm.define "insider", autostart: false do |cfg|
     cfg.vm.box     = "windows_server_insider_docker"
     cfg.vm.provision "shell", path: "scripts/create-machine.ps1", args: "-machineHome #{home} -machineName insider"
