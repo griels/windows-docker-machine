@@ -76,7 +76,7 @@ Vagrant.configure("2") do |config|
     cfg.vm.box     = "windows_2022_docker"
     cfg.vm.provision "shell", path: "scripts/create-machine.ps1", args: "-machineHome #{home} -machineName 2022-box"
     cfg.vm.provider "parallels" do |v, override|
-      override.vm.network :private_network, ip: "10.211.55.5", gateway: "10.211.55.1"
+      override.vm.network :private_network, ip: "10.211.70.3", gateway: "10.211.70.1"
     end
   end
   config.vm.define "insider", autostart: false do |cfg|
